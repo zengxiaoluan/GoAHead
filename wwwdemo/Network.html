@@ -1,0 +1,103 @@
+﻿<form>
+  <fieldset class="legend">
+    <legend>Ethermet Interfaces</legend>
+   <table width="100%">
+<tr>
+  <td ALIGN="CENTER"><table width="65%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td ALIGN="left" height="30px">IP Address (100Mb Link): &nbsp;</td>
+        <td ALIGN="left"><input name=url2 type=text title="URL" value="192.168.0.1" size=20></td>
+      </tr>
+      <tr>
+        <td ALIGN="left" height="30px">Netmask (100Mb Link): &nbsp;</td>
+        <td ALIGN="left"><input type=text name=url6 title="URL" size=20 value="255.255.255.0"></td>
+      </tr>
+      <tr>
+        <td ALIGN="left" height="30px">IP Address (1G Link): &nbsp;</td>
+        <td ALIGN="left"><input type=text name=url7 title="URL" size=20 value="192.168.0.1"></td>
+      </tr>
+      <tr>
+        <td ALIGN="left" height="30px">Net mask (1Gb Link): &nbsp;</td>
+        <td ALIGN="left"><input type=text name=url8 title="URL" size=20 value="255.255.255.0"></td>
+      </tr>
+      <tr>
+        <td ALIGN="left" height="30px">Port Number: &nbsp;</td>
+        <td ALIGN="left"><input type=text name=url9 title="URL" size=3 value="33800"></td>
+      </tr>
+      <tr>
+        <td width="39%" ALIGN="left" height="30px">Command Interface: &nbsp;</td>
+        <td width="61%" ALIGN="left"><INPUT TYPE=radio name=Interface title="100Mb link only"> 
+          100Mb link only <INPUT TYPE=radio CHECKED name=Interface title="100Mb and 1Gb links"> 
+          100Mb and 1Gb links</td>
+        </tr>
+      </tbody>
+    </table></td>
+</tr>
+</table>
+  </fieldset>
+&nbsp;
+
+
+  <fieldset class="legend">
+    <legend>DICOM Storage Server</legend>
+   <table width="100%">
+<tr>
+  <td ALIGN="CENTER"><table width="65%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td width="32%" height="30px" ALIGN="left">IP Address: &nbsp;</td>
+        <td width="68%" ALIGN="left"><input type=text name=url10 title="URL" size=20 value="--storHostName"></td>
+      </tr>
+      <tr>
+        <td ALIGN="left" height="30px">Port Number: &nbsp;</td>
+        <td ALIGN="left"><input type=text name=url13 title="URL" size=3 value="6000"></td>
+      </tr>
+      <tr>
+        <td ALIGN="left" height="30px">Remote AE Title&nbsp;</td>
+        <td ALIGN="left"><input type=text name=url11 title="URL" size=20 value="--storAETitle"></td>
+      </tr>
+      <tr>
+        <td ALIGN="left" height="30px">Local AE Title: &nbsp;</td>
+        <td ALIGN="left"><input type=text name=url12 title="URL" size=20 value="--storPeerAETitle"></td>
+      </tr>
+      </tbody>
+  </table></td>
+</tr>
+</table>
+  </fieldset>
+&nbsp;
+
+
+  <fieldset class="legend">
+    <legend>DICOM RIS Server</legend>
+    <table width="65%" border="0" align="center" cellpadding="0" cellspacing="0">
+      <tbody>
+        <tr>
+          <td width="32%" height="30px" ALIGN="left">IP Address: &nbsp;</td>
+          <td width="68%" ALIGN="left"><input type=text name=Ris title="URL" size=20 value="RisHostName" id="Ris"></td>
+        </tr>
+        <tr>
+          <td ALIGN="left" height="30px">Port Number: &nbsp;</td>
+          <td ALIGN="left"><input type=text name=url title="URL" size=3 value="6000"></td>
+        </tr>
+        <tr>
+          <td ALIGN="left" height="30px">Remote AE Title&nbsp;</td>
+          <td ALIGN="left"><input type=text name=url title="URL" size=20 value="RisAETitle"></td>
+        </tr>
+        <tr>
+          <td ALIGN="left" height="30px">Local AE Title: &nbsp;</td>
+          <td ALIGN="left"><input type=text name=url title="URL" size=20 value="RisPeerAETitle"></td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset> 
+  <table width="40%" border="0" align="right" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="55%" ALIGN="CENTER" height="40"><input type=submit name=ok2 value="Cancel Changes"></td>
+        <td width="45%" ALIGN="CENTER"><input type=submit name=ok value="Submit New Settings"></td>
+        </tr>
+      </tbody>
+    </table>
+</form> 

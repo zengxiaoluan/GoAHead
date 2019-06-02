@@ -1,0 +1,176 @@
+﻿<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td height="30px" ALIGN="right"><input type=submit name=Nest_Preset value="...">
+        &nbsp;&nbsp;&nbsp;&nbsp;</td>
+      </tr>
+      </tbody>
+    </table>
+
+<fieldset class="legend">
+    <legend>Input/Output Selection</legend>
+   <table width="100%">
+<tr>
+  <td ALIGN="CENTER"><table width="98%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td height="30px" colspan="4" ALIGN="left">Router 1:</td>
+        <td colspan="4" ALIGN="left">Router 2:</td>
+      </tr>
+      <tr>
+        <td height="40" colspan="2" ALIGN="left">Input:&nbsp;<span style="padding-left:10px;">
+          <select name="Selection">
+            <option value="S-Video2">S-Video2
+              <option value="1">1
+                <option value="2">2
+                </select>
+        </span>&nbsp;</td>
+        <td colspan="2" ALIGN="left">Output:&nbsp;
+<select name="Selection2">
+  <option value="DVI-D_live">DVI-D_live
+    <option value="1">1
+      <option value="2">2
+      </select>
+        </span></td>
+        <td colspan="2" ALIGN="left">Input:&nbsp;<span style="padding-left:10px;">
+          <select name="Selection3">
+            <option value="DP(live)">DP(live)
+              <option value="1">1
+                <option value="2">2
+                </select>
+          </span>&nbsp;</td>
+        <td colspan="2" ALIGN="left">Output:
+            <select name="Selection4">
+            <option value="DVI-D_ref">DVI-D_ref
+              <option value="1">1
+                <option value="2">2
+                </select>
+        </span></td>
+      </tr>
+      <tr>
+        <td width="63" height="30px" ALIGN="left">&nbsp;</td>
+        <td width="176" height="40" ALIGN="left"><input type=submit name=Restore_Current4 value="swtNextInput"></td>
+        <td width="68" height="30px" ALIGN="left">&nbsp;</td>
+        <td width="281" ALIGN="left"><input type=submit name=Restore_Current5 value="Parameter Browse"></td>
+        <td width="76" ALIGN="left">&nbsp;</td>
+        <td width="266" ALIGN="left"><input type=submit name=Restore_Current6 value="swtNextInput"></td>
+        <td width="72" ALIGN="left">&nbsp;</td>
+        <td width="297" ALIGN="left"><input type=submit name=Restore_Current7 value="Parameter Browse"></td>
+      </tr>
+      <tr>
+        <td height="50" colspan="8" ALIGN="center"><input type=submit name=Restore_Current value="Scanning">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+<input type=submit name=Restore_Current2 value="Switch Output">
+          &nbsp;&nbsp;&nbsp;&nbsp;
+<input type=submit name=Restore_Current3 value="Grab Image"></td>
+        </tr>
+      </tbody>
+    </table></td>
+</tr>
+</table>
+  </fieldset>
+&nbsp;
+
+<fieldset class="legend">
+    <legend>Information</legend>
+  <table width="100%">
+<tr>
+  <td ALIGN="CENTER"><table width="80%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td width="50%" height="30px" ALIGN="left">FPGA 1</td>
+        <td width="51%" ALIGN="left">FPGA 2</td>
+      </tr>
+      <tr>
+        <td height="30px" ALIGN="left">Input: S-Video2</td>
+        <td ALIGN="left">Input: DP(live)</td>
+        </tr>
+      <tr>
+        <td height="30px" ALIGN="left">Resolution: 0 x-1</td>
+        <td ALIGN="left">Resolution: 0 x-1</td>
+        </tr>
+      <tr>
+        <td height="30px" ALIGN="left">Vertical Frequency: 0.-1Hz</td>
+        <td ALIGN="left">Vertical Frequency: 0.-1Hz</td>
+        </tr>
+      <tr>
+        <td height="30px" ALIGN="left">Horizontal Frequency: 0.-1Hz</td>
+        <td ALIGN="left">Horizontal Frequency: 0.-1Hz</td>
+        </tr>
+      <tr>
+        <td height="30px" ALIGN="left">Pixel Clock: 0.-1Hz</td>
+        <td ALIGN="left">Pixel Clock: 0.-1Hz</td>
+        </tr>
+      </tbody>
+  </table></td>
+</tr>
+</table>
+  </fieldset>
+&nbsp;
+
+<table width="100%">
+<tr>
+  <td width="50%" ALIGN="left">  <fieldset class="legend">
+    <legend>Input Configuration</legend>
+   <table width="100%">
+<tr>
+  <td ALIGN="CENTER"><table width="80%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td height="30px" ALIGN="center"><input name="Configuration" type="radio" id="RGB" onclick="webcam_enable_switch()" value="0" checked="checked">RGB
+      &nbsp;
+      <input type="radio" name="Configuration" value="1" id="YPrPb" onClick="webcam_enable_switch()">
+      YPrPb
+      &nbsp;
+      <input type="radio" name="Configuration" value="2" id="Y" onClick="webcam_enable_switch()">
+      Y</td>
+        </tr>
+      </tbody>
+  </table></td>
+</tr>
+</table>
+  </fieldset>
+&nbsp;
+
+
+<fieldset class="legend">
+  <legend>Dither</legend>
+  <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="29%" height="30px" ALIGN="right">&nbsp;</td>
+        <td width="71%" ALIGN="left"><INPUT name=Enable_Dithering TYPE=checkbox title="Enable Dithering" checked="checked">
+          &nbsp; Enable Dithering</td>
+      </tr>
+    </tbody>
+  </table>
+  </fieldset>
+</td>
+  <td ALIGN="CENTER"><fieldset class="legend">
+  <legend>Output Signal Format</legend>
+  <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td width="40" height="60" ALIGN="right">&nbsp;</td>
+        <td width="71%" ALIGN="left"><input name="Format" type="radio" id="SXGA" onclick="webcam_enable_switch()" value="0">SXGA&nbsp;&nbsp;&nbsp;&nbsp;
+<input name="Format" type="radio" id="WUXGA" onClick="webcam_enable_switch()" value="1" checked="checked">WUXGA</td>
+      </tr>
+      <tr>
+        <td ALIGN="right" height="60">&nbsp;</td>
+        <td ALIGN="left"><INPUT name=Enable_Smartlock TYPE=checkbox title="Enable Smartlock" checked="checked">
+        &nbsp; Enable Smartlock</td>
+      </tr>
+    </tbody>
+  </table>
+  </fieldset></td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td height="40" ALIGN="right"><input type=submit name=Detailed_video_settings value="Detailed video settings">
+        &nbsp;&nbsp;&nbsp;&nbsp;</td>
+      </tr>
+  </tbody>
+    </table>

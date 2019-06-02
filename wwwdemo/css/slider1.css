@@ -1,0 +1,338 @@
+
+
+/**************************************************************
+
+	Slider
+	v 1.0
+
+**************************************************************/
+#talkbubble { 
+width: 10px; 
+height: 10px; 
+background: #e8e8e8; 
+position: relative;  
+} 
+#talkbubble:before { 
+content:""; 
+position: absolute; 
+bottom: 100%; 
+top: 10px; 
+width: 0; 
+height: 0; 
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #e8e8e8;
+}
+#slideContainer1, #slideContainer2 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer3 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer4 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer5 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer6 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer7 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer8 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer9 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer10 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer11 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer12 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer13 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer14 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer15 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer16 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+#slideContainer17 {
+	border: 1px solid #e8e8e8;
+	height: 10px;
+}
+
+
+#slideHandle1, #slideHandle2 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle3 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle4 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle5 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle6 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle7 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle8 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle9 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle10 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle11 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle12 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle13 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle14 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle15 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle16 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+#slideHandle17 {
+	width:0;
+height:0;
+border-left:10px solid transparent;
+border-right:10px solid transparent;
+border-top:10px solid #0066cc;
+	cursor: pointer;
+}
+
+#slideContainer2- {
+	margin-top: 20px;
+	background-image: url(bg.gif);
+}
+
+#pos1, #pos2 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos3 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos4 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos5 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos6 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos7 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos8 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos9 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos10 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos11 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos12 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos13 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos14 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos15 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos16 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+#pos17 {
+	border: 1px solid #ccc;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	padding-left: 2px;
+}
+/*************************************************************/
