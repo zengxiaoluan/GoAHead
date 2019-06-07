@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +11,6 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css" />
 	<script type="text/javascript" src="js/modernizr.custom.04022.js"></script>
 	<link href="css/slider.css" rel="stylesheet" type="text/css" />
-	<!-- <link rel="stylesheet" href="css/main.css" type="text/css" media="all"> -->
 	<script type="text/javascript" src="./js/jquery.min.js"></script>
 	<script type="text/javascript" src="./js/mootools.js"></script>
 	<script type="text/javascript" src="./js/slider.js"></script>
@@ -25,6 +23,9 @@
 	</style>
 
 	<script>
+		var api = { // API 都写在这里
+
+		};
 		// 把相关的接口都写在这里
 		var interface = {
 			mouseOptionsHandler: function (type) {
@@ -43,10 +44,10 @@
 
 				var slider1 = new Slider('slideContainer1', 'slideHandle1', {
 					onComplete: function (val) {
-						$('#pos1').html(val);
+						$('#pos1').val(val);
 						interface.enableTimeSliderHandler(val)
 					},
-					steps: 100
+					steps: 60
 				});
 
 				var slider5 = new Slider('slideContainer5', 'slideHandle5', {
@@ -63,24 +64,12 @@
 			})
 		})(jQuery)
 	</script>
-	<!--[if lt IE 9]>
-			<style>
-				.content{
-					height: auto;
-					margin: 0;
-				}
-				.content div {
-					position: relative;
-				}
-			</style>
-		<![endif]-->
 </head>
 
 <body>
 	<div class="container">
 		<section class="tabs">
-			<input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked"
-				style="display:none" />
+			<input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" style="display:none" />
 			<label for="tab-1" class="tab-label-1">Settings</label>
 
 			<input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" style="display:none" />
@@ -100,34 +89,24 @@
 						<legend>Mouse Options</legend>
 						<table width="100%">
 							<tr>
-								<td colspan="2" ALIGN="CENTER" height="30px"><input type=button name='remote-mouse'
-										value="Enable Remote Mouse"></td>
-								<td colspan="2" ALIGN="CENTER"><input type=button name='remote-mouse'
-										value="Disable OSD Mouse"></td>
+								<td colspan="2" ALIGN="CENTER" height="30px"><input type=button name='remote-mouse' value="Enable Remote Mouse"></td>
+								<td colspan="2" ALIGN="CENTER"><input type=button name='remote-mouse' value="Disable OSD Mouse"></td>
 							</tr>
 							<tr>
-								<td align="right" colspan="2">Enable Time (seconds)</td>
-								<td>
+								<td align="right">Enable Time (seconds)</td>
+								<td colspan="2" style="width: 120px;">
 									<div id="slideContainer1">
 										<div id="slideHandle1"></div>
 									</div>
 								</td>
 								<td>
-									<div id="pos1">0</div>
+									<input id="pos1" value="0" />
 								</td>
 							</tr>
 							<tr>
-								<td ALIGN="CENTER">
-									<table width="50%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="35%" ALIGN="right" height="30px"><INPUT name=Enable_Smartlock
-														TYPE=checkbox title="Enable Smartlock" checked="checked"></td>
-												<td width="65%" ALIGN="left">&nbsp;&nbsp;&nbsp;&nbsp;Enable Remote Mouse
-												</td>
-											</tr>
-										</tbody>
-									</table>
+								<td colspan="4" align="center">
+									<INPUT id="enable-remote-mouse" name=Enable_Smartlock TYPE=checkbox title="Enable Smartlock" checked="checked">
+									<label for="enable-remote-mouse">Enable Remote Mouse</label>
 								</td>
 							</tr>
 						</table>
@@ -137,41 +116,27 @@
 						<legend>On-Screen Messages</legend>
 						<table width="100%">
 							<tr>
+								<td ALIGN="CENTER" height="30px">
+									<INPUT id="disable-on-screen-messages" TYPE=radio name=Messages title="Disabled">
+									<label for="disable-on-screen-messages">Disabled</label>
+								</td>
 								<td ALIGN="CENTER">
-									<table width="40%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="55%" ALIGN="CENTER" height="30px"><INPUT TYPE=radio
-														name=Messages title="Disabled">
-													Disabled</td>
-												<td width="45%" ALIGN="CENTER"><INPUT TYPE=radio CHECKED name=Messages
-														title="Enabled">
-													Enabled</td>
-											</tr>
-										</tbody>
-									</table>
+									<INPUT id="enabled-on-screen-messages" TYPE=radio CHECKED name=Messages title="Enabled">
+									<label for="enabled-on-screen-messages">Enabled</label>
 								</td>
 							</tr>
 						</table>
 					</fieldset>
+
 					<fieldset class="legend">
 						<legend>Frame Grab Indicator</legend>
 						<table width="100%">
 							<tr>
-								<td width="22%" ALIGN="CENTER">&nbsp;</td>
-								<td width="78%" ALIGN="left">
-									<table width="60%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="52%" ALIGN="left" height="30px"><INPUT TYPE=radio
-														name=Indicator title="Use_Freeze_Image">
-													Use Freeze Image</td>
-												<td width="48%" ALIGN="left"><INPUT TYPE=radio CHECKED name=Indicator
-														title="Use_Record_Symbol">
-													Use Record Symbol</td>
-											</tr>
-										</tbody>
-									</table>
+								<td width="52%" ALIGN="left" height="30px">
+									<INPUT TYPE=radio name=Indicator title="Use_Freeze_Image">Use Freeze Image
+								</td>
+								<td width="48%" ALIGN="left">
+									<INPUT TYPE=radio CHECKED name=Indicator title="Use_Record_Symbol">Use Record Symbol
 								</td>
 							</tr>
 							<tr>

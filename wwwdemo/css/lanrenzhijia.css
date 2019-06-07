@@ -1,7 +1,6 @@
 @import url('normalize.css');
-/* ��������������֮�� */
 body{
-	font-family: 'Open Sans Condensed','Arial Narrow', serif;
+	/* font-family: 'Open Sans Condensed','Arial Narrow', serif; */
 	background: #ddd;
 	font-weight: 400;
 	font-size: 15px;
