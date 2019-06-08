@@ -23,11 +23,11 @@ Set方法，传参数　type: type1, data,data2
 2.1 settings.asp
 ret = GetRemoteMouse()
 SetRemoteMouse(0 or 1)
-GetSlider (type1)
+ret = GetSlider (type1)
 SetSlider(type, data)
 SetSelect(type, data)
 ret = GetSelect(type)
-其中type1等于如下枚举, data2就是slider值
+其中type 等于如下枚举, data 就是slider值
 typedef enum eOSDDISP_TYPE_tag{
     OSDDISP_TYPE_MOUSEICON =0,
     OSDDISP_TYPE_SCREENMSG,
