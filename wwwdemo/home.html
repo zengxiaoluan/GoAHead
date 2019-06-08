@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,22 +24,43 @@
 	</style>
 
 	<script>
-		var api = { // API 都写在这里
-
-		};
-		// 把相关的接口都写在这里
-		var interface = {
-			mouseOptionsHandler: function (type) {
-				console.log(type)
-			},
-			loadHandler: function () {
-				console.log('页面加载已经完成')
-			},
-			enableTimeSliderHandler: function (val) {
-				console.log('滑动值：' + val)
-			}
+		var API = { // API 都写在这里
+			setSlider: '/goform/SetSlider',
+			mouseOptions: 'goform/mouseOptions'
 		};
 		(function ($) {
+			// 把相关的接口都写在这里
+			var interface = {
+				mouseOptionsHandler: function (type) {
+					console.log(type)
+					$.ajax({
+						method: 'post',
+						url: API.mouseOptions,
+						data: {
+							type: type // 'Enable Remote Mouse' or 'Disable OSD Mouse'
+						}
+					}).done(function (res) {
+						console.log(res)
+					})
+				},
+				loadHandler: function () {
+					console.log('页面加载已经完成')
+				},
+				enableTimeSliderHandler: function (val) {
+					console.log('滑动值：' + val)
+					$.ajax({
+						method: 'post',
+						url: API.setSlider,
+						data: {
+							type: 'Enable Time',
+							data: val
+						}
+					}).done(function (res) {
+						console.log(res)
+					})
+				}
+			};
+
 			$(document).ready(function () {
 				interface.loadHandler()
 
@@ -69,7 +91,8 @@
 <body>
 	<div class="container">
 		<section class="tabs">
-			<input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" style="display:none" />
+			<input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked"
+				style="display:none" />
 			<label for="tab-1" class="tab-label-1">Settings</label>
 
 			<input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" style="display:none" />
@@ -89,8 +112,10 @@
 						<legend>Mouse Options</legend>
 						<table width="100%">
 							<tr>
-								<td colspan="2" ALIGN="CENTER" height="30px"><input type=button name='remote-mouse' value="Enable Remote Mouse"></td>
-								<td colspan="2" ALIGN="CENTER"><input type=button name='remote-mouse' value="Disable OSD Mouse"></td>
+								<td colspan="2" ALIGN="CENTER" height="30px"><input type=button name='remote-mouse'
+										value="Enable Remote Mouse"></td>
+								<td colspan="2" ALIGN="CENTER"><input type=button name='remote-mouse'
+										value="Disable OSD Mouse"></td>
 							</tr>
 							<tr>
 								<td align="right">Enable Time (seconds)</td>
@@ -105,7 +130,8 @@
 							</tr>
 							<tr>
 								<td colspan="4" align="center">
-									<INPUT id="enable-remote-mouse" name=Enable_Smartlock TYPE=checkbox title="Enable Smartlock" checked="checked">
+									<INPUT id="enable-remote-mouse" name=Enable_Smartlock TYPE=checkbox
+										title="Enable Smartlock" checked="checked">
 									<label for="enable-remote-mouse">Enable Remote Mouse</label>
 								</td>
 							</tr>
@@ -121,7 +147,8 @@
 									<label for="disable-on-screen-messages">Disabled</label>
 								</td>
 								<td ALIGN="CENTER">
-									<INPUT id="enabled-on-screen-messages" TYPE=radio CHECKED name=Messages title="Enabled">
+									<INPUT id="enabled-on-screen-messages" TYPE=radio CHECKED name=Messages
+										title="Enabled">
 									<label for="enabled-on-screen-messages">Enabled</label>
 								</td>
 							</tr>
