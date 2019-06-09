@@ -15,6 +15,7 @@ var Slider = new Class({
 	options: {
 		onChange: Class.empty,
 		onComplete: Class.empty,
+		disable: Class.empty,
 		onTick: function(pos){
 			this.knob.setStyle(this.p, pos);
 		},
@@ -112,6 +113,10 @@ var Slider = new Class({
 	},
 
 	draggedKnob: function(){
+		if (this.options.disable && this.options.disable()) {
+			console.log(11111)
+			return;
+		}
 		this.step = this.toStep(this.drag.value.now[this.z]);
 		this.checkStep();
 		this.setDefault(this.step);

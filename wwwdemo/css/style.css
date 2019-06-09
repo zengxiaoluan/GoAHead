@@ -3,14 +3,28 @@
 	margin: 20px auto;
 	width: 1000px;
 }
-
+.active {
+	background: blue;
+	color: white;
+}
 .width-left {
 	width: 30%;
 	padding-right: 10px;
+	text-align: right;
+}
+.disabled {
+	cursor: not-allowed;
+	color: gray;
+}
+.width-middle {
+	width: 40%;
+}
+.row {
+	height: 50px;
 }
 
-.width-middle {
-	width: 240px;
+.row td {
+	text-align: center;
 }
 
 .tabs input#tab-2{
@@ -64,11 +78,6 @@
 
 .tabs input:hover + label {
 	background: #f3f3f3;
-}
-
-.tabs label:first-of-type {
-    z-index: 5;
-    box-shadow: 2px 0 2px rgba(0,0,0,0.1);
 }
 
 .tab-label-2 {

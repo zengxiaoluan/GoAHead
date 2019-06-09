@@ -16,13 +16,6 @@
 	<script type="text/javascript" src="./js/mootools.js"></script>
 	<script type="text/javascript" src="./js/slider.js"></script>
 
-	<style>
-		.active {
-			background: blue;
-			color: white;
-		}
-	</style>
-
 	<script>
 		var API = { // API 都写在这里
 			setSlider: '/goform/SetSlider',
@@ -132,7 +125,39 @@
 				});
 
 				var slider5 = new Slider('slideContainer5', 'slideHandle5', {
-					onComplete: function (val) { $('#pos5').html(val); }, steps: 10
+					onComplete: function (val) {
+						$('#pos5').html(val);
+						console.log(val)
+						$.ajax({
+							type: "POST",
+							url: "url",
+							data: {
+								data: val
+							},
+							success: function (response) {
+								console.log(response)								
+							}
+						});
+					}, 
+					steps: 10
+				});
+
+				new Slider('slideContainer6', 'slideHandle6', {
+					onComplete: function (val) {
+						console.log(val)
+						$('#pos6').html(val);
+						$.ajax({
+							type: "POST",
+							url: "url",
+							data: {
+								data: val
+							},
+							success: function (response) {
+								console.log(response)
+							}
+						});
+					},
+					steps: 10
 				});
 
 				var slider2 = new Slider('slideContainer2', 'slideHandle2', {
@@ -143,11 +168,37 @@
 					steps: 60,
 				});
 
+				var slider4 = new Slider('slideContainer4', 'slideHandle4', {
+					onChange: function () {
+						return false;
+					},
+					onComplete: function (val) {
+						$('#pos4').html(val);
+						console.log(val)
+						$.ajax({
+							type: "POST",
+							url: "url",
+							data: {
+								data: val
+							},
+							dataType: "json",
+							success: function (response) {
+								console.log(response)
+							}
+						});
+					},
+					steps: 10
+				});
+
 				var slider3 = new Slider('slideContainer3', 'slideHandle3', { 
 					onComplete: function (val) {
 						console.log(val)
 						interface.scanningSliderHandler(val)
-						$('#pos3').html(val); 
+						$('#pos3').html(val);
+					},
+					disable: function (val) {
+						console.log(val)
+						return true
 					},
 					steps: 5
 				});
@@ -171,6 +222,25 @@
 
 				$('[name="InputConfiguration"]').click(function () {
 					interface.toggleInputConfiguration(this.value)
+				})
+				$('[name="MessageConfiguration"]').click(function () {
+					console.log(this.value)
+					$.ajax({
+						type: "POST",
+						url: "url",
+						data: {
+							data: this.value
+						},
+						success: function (response) {
+							console.log(response)
+						}
+					});
+
+					if (this.value == 0) {
+						$('#show-with-variable-time').removeClass('disabled')
+					} else {
+						$('#show-with-variable-time').addClass('disabled')
+					}
 				})
 			})
 		})(jQuery)
@@ -301,136 +371,75 @@
 					<fieldset class="legend">
 						<legend>PIP Message Configuration</legend>
 						<table width="100%">
-							<tr>
-								<td width="22%" ALIGN="CENTER">&nbsp;</td>
-								<td width="78%" ALIGN="left">
-									<table width="60%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="50%" ALIGN="left" height="30px"><INPUT
-														name=MessageConfiguration TYPE=radio title="Enable_Infinite"
-														checked="checked">
-													Enable Infinite</td>
-												<td width="50%" ALIGN="left"><INPUT TYPE=radio name=MessageConfiguration
-														title="Enable_Variable_Time">
-													Enable Variable Time</td>
-											</tr>
-										</tbody>
-									</table>
+							<tr class="row">
+								<td colspan="2">
+									<INPUT id="enable-infinite" value="1" name=MessageConfiguration TYPE=radio title="Enable_Infinite" checked="checked">
+									<label for="enable-infinite">Enable Infinite</label>
+								</td>
+								<td colspan="2">
+									<INPUT id="enable-variable-time" value="0" TYPE=radio name=MessageConfiguration title="Enable_Variable_Time">
+									<label for="enable-variable-time">Enable Variable Time</label>
 								</td>
 							</tr>
-							<tr>
-								<td colspan="2" ALIGN="CENTER">
-									<table width="70%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="37%" align="right" height="40">Message Display Time
-													(seconds):</td>
-												<td width="43%" align="left" style="padding-left:10px;">
-													<div id="container">
-														<div id="example">
-															<div id="slideContainer4">
-																<div id="slideHandle4"></div>
-															</div>
-
-
-															<script type="text/javascript">
-
-																window.addEvent('domready', function () {
-																	var slider1 = new Slider('slideContainer4', 'slideHandle4', { onComplete: function (val) { $('pos4').setHTML(val); }, steps: 10 });
-																});
-															</script>
-														</div>
-												</td>
-												<td width="20%" style="padding-left:10px;">
-													<div id="pos4">0</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+							<tr id="show-with-variable-time" class="disabled">
+								<td align="right" class="width-left" height="40">Message Display Time (seconds):</td>
+								<td colspan="2" class="width-middle">
+									<div id="slideContainer4">
+										<div id="slideHandle4"></div>
+									</div>
+								</td>
+								<td>
+									<div id="pos4">0</div>
 								</td>
 							</tr>
 						</table>
 					</fieldset>
+
 					<fieldset class="legend">
 						<legend>Main Video Message Configuration</legend>
 						<table width="100%">
-							<tr>
-								<td width="100%" colspan="2" ALIGN="CENTER">
-									<table width="70%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="37%" align="right" height="40">Message Display Time
-													(seconds):</td>
-												<td width="43%" align="left" style="padding-left:10px;">
-													<div id="container">
-														<div id="example">
-															<div id="slideContainer5">
-																<div id="slideHandle5"></div>
-															</div>
-
-
-															<script type="text/javascript">
-
-
-															</script>
-														</div>
-												</td>
-												<td width="20%" style="padding-left:10px;">
-													<div id="pos5">0</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+							<tr class="row">
+								<td class="width-left">Message Display Time(seconds):</td>
+								<td colspan="2" class="width-middle">
+									<div id="slideContainer5">
+										<div id="slideHandle5"></div>
+									</div>
+								</td>
+								<td>
+									<div id="pos5">0</div>
 								</td>
 							</tr>
 						</table>
 					</fieldset>
+
 					<fieldset class="legend">
 						<legend>Switch Input Message Configuration</legend>
 						<table width="100%">
-							<tr>
-								<td width="100%" colspan="2" ALIGN="CENTER">
-									<table width="70%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="37%" align="right" height="40">Message Display Time
-													(seconds):</td>
-												<td width="43%" align="left" style="padding-left:10px;">
-													<div id="container">
-														<div id="example">
-															<div id="slideContainer6">
-																<div id="slideHandle6"></div>
-															</div>
-
-
-															<script type="text/javascript">
-
-																window.addEvent('domready', function () {
-																	var slider1 = new Slider('slideContainer6', 'slideHandle6', { onComplete: function (val) { $('pos6').setHTML(val); }, steps: 10 });
-																});
-															</script>
-														</div>
-												</td>
-												<td width="20%" style="padding-left:10px;">
-													<div id="pos6">0</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+							<tr class="row">
+								<td class="width-left">Message Display Time(seconds):</td>
+								<td colspan="2" class="width-middle">
+									<div id="slideContainer6">
+										<div id="slideHandle6"></div>
+									</div>
+								</td>
+								<td>
+									<div id="pos6">0</div>
 								</td>
 							</tr>
 						</table>
 					</fieldset>
 				</div>
+
 				<div class="content-2">
 					<iframe src="Network.html" id="iframepage" frameborder="0" scrolling="no" marginheight="0"
 						marginwidth="0" width='960px' height='800px'></iframe>
 				</div>
+
 				<div class="content-3">
 					<iframe src="Video.html" id="iframepage" frameborder="0" scrolling="no" marginheight="0"
 						marginwidth="0" width='960px' height='800px'></iframe>
 				</div>
+
 				<div class="content-4">
 					<iframe src="System.html" id="iframepage" frameborder="0" scrolling="no" marginheight="0"
 						marginwidth="0" width='960px' height='800px'>
@@ -439,5 +448,4 @@
 		</section>
 	</div>
 </body>
-
 </html>
