@@ -19,7 +19,6 @@
 	<script>
 		var API = { // API 都写在这里
 			setSlider: '/goform/SetSlider',
-			mouseOptions: '/goform/mouseOptions',
 			indicator: '/goform/indicator',
 			IndicatorSlider: '/goform/IndicatorSlider'
 		};
@@ -34,7 +33,7 @@
 					console.log(map[type])
 					$.ajax({
 						method: 'post',
-						url: API.mouseOptions,
+						url: '/goform/GetRemoteMouse',
 						data: {
 							type: map[type]
 						}
