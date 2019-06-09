@@ -33,7 +33,7 @@
 					console.log(map[type])
 					$.ajax({
 						method: 'post',
-						url: '/goform/GetRemoteMouse',
+						url: '/goform/SetRemoteMouse',
 						data: {
 							type: map[type]
 						}
@@ -249,7 +249,8 @@
 		})(jQuery)
 
 		function enableRemoteMouse () {
-			console.log(this)
+			var button = $('#enable-remote-mouse')
+			console.log(button.checked)
 		}
 	</script>
 </head>
