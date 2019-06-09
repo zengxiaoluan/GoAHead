@@ -247,6 +247,10 @@
 				})
 			})
 		})(jQuery)
+
+		function enableRemoteMouse () {
+			console.log(this)
+		}
 	</script>
 </head>
 
@@ -276,9 +280,10 @@
 							<tr>
 								<td colspan="2" ALIGN="CENTER" height="30px">
 									<input type=button name='remote-mouse' value="Enable Remote Mouse">
-									</td>
-								<td colspan="2" ALIGN="CENTER"><input type=button name='remote-mouse'
-										value="Disable OSD Mouse"></td>
+								</td>
+								<td colspan="2" ALIGN="CENTER">
+									<input type=button name='remote-mouse' value="Disable OSD Mouse">
+								</td>
 							</tr>
 							<tr>
 								<td align="right" class="width-left">Enable Time (seconds)</td>
@@ -293,7 +298,7 @@
 							</tr>
 							<tr>
 								<td colspan="4" align="center">
-									<INPUT id="enable-remote-mouse" name=Enable_Smartlock type='checkbox' title="Enable Smartlock" checked="checked">
+									<INPUT id="enable-remote-mouse" onclick="enableRemoteMouse();" name=Enable_Smartlock type='checkbox' title="Enable Smartlock" checked="checked">
 									<label for="enable-remote-mouse">Enable Remote Mouse</label>
 								</td>
 							</tr>
