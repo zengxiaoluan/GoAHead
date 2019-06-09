@@ -4,6 +4,14 @@
 	width: 1000px;
 }
 
+.width-left {
+	width: 30%;
+	padding-right: 10px;
+}
+
+.width-middle {
+	width: 240px;
+}
 
 .tabs input#tab-2{
 	left: 120px;

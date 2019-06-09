@@ -26,7 +26,9 @@
 	<script>
 		var API = { // API 都写在这里
 			setSlider: '/goform/SetSlider',
-			mouseOptions: 'goform/mouseOptions'
+			mouseOptions: '/goform/mouseOptions',
+			indicator: '/goform/indicator',
+			IndicatorSlider: '/goform/IndicatorSlider'
 		};
 		(function ($) {
 			// 把相关的接口都写在这里
@@ -58,7 +60,64 @@
 					}).done(function (res) {
 						console.log(res)
 					})
-				}
+				},
+				indicatorHandler: function (type) {
+					console.log(type)
+					$.ajax({
+						method: 'post',
+						url: API.indicator,
+						data: {
+							type: type
+						}
+					}).done(function (res) {
+						console.log(res)
+					})
+				},
+				indicatorSliderHandler: function (step) {
+					console.log(step)
+					$.ajax({
+						method: 'post',
+						url: API.indicatorSliderHandler,
+						data: {
+							step: step
+						}
+					}).done(function (res) {
+						console.log(res)
+					})
+				},
+				scanningSliderHandler: function (step) {
+					console.log(step)
+					$.ajax({
+						method: 'post',
+						url: '/goform/scanningSlider',
+						data: {
+							step: step
+						}
+					}).done(function (res) {
+						console.log(res)
+					})
+				},
+				toggleMessages: function (operator) {
+					$.ajax({
+						method: 'post',
+						url: '/goform/toggleMessages',
+						data: {
+							operator: operator
+						}
+					}).done(function (res) {
+						console.log(res)
+					})
+				},
+				toggleInputConfiguration: function (operator) {
+					console.log(operator)
+					$.ajax({
+						method: 'POST',
+						url: '/goform/toggleInputConfiguration',
+						data: {
+							operator: operator
+						}
+					})
+				},
 			};
 
 			$(document).ready(function () {
@@ -76,6 +135,23 @@
 					onComplete: function (val) { $('#pos5').html(val); }, steps: 10
 				});
 
+				var slider2 = new Slider('slideContainer2', 'slideHandle2', {
+					onComplete: function (val) {
+						$('#pos2').html(val);
+						interface.indicatorSliderHandler(val)
+					},
+					steps: 60,
+				});
+
+				var slider3 = new Slider('slideContainer3', 'slideHandle3', { 
+					onComplete: function (val) {
+						console.log(val)
+						interface.scanningSliderHandler(val)
+						$('#pos3').html(val); 
+					},
+					steps: 5
+				});
+
 				// mouse options
 				$("[name='remote-mouse']").click(function () {
 					$("[name='remote-mouse']").removeClass('active')
@@ -83,6 +159,19 @@
 					interface.mouseOptionsHandler($(this).val())
 				});
 
+				// On-Screen Messages
+				$('[name="Messages"]').click(function (){
+					console.log(this.value)
+					interface.toggleMessages(this.value)
+				});
+
+				$("[name='Indicator']").click(function () {
+					interface.indicatorHandler(this.id)
+				});
+
+				$('[name="InputConfiguration"]').click(function () {
+					interface.toggleInputConfiguration(this.value)
+				})
 			})
 		})(jQuery)
 	</script>
@@ -118,8 +207,8 @@
 										value="Disable OSD Mouse"></td>
 							</tr>
 							<tr>
-								<td align="right">Enable Time (seconds)</td>
-								<td colspan="2" style="width: 120px;">
+								<td align="right" class="width-left">Enable Time (seconds)</td>
+								<td colspan="2" style="width: 240px;">
 									<div id="slideContainer1">
 										<div id="slideHandle1"></div>
 									</div>
@@ -130,8 +219,7 @@
 							</tr>
 							<tr>
 								<td colspan="4" align="center">
-									<INPUT id="enable-remote-mouse" name=Enable_Smartlock TYPE=checkbox
-										title="Enable Smartlock" checked="checked">
+									<INPUT id="enable-remote-mouse" name=Enable_Smartlock type='checkbox' title="Enable Smartlock" checked="checked">
 									<label for="enable-remote-mouse">Enable Remote Mouse</label>
 								</td>
 							</tr>
@@ -143,12 +231,11 @@
 						<table width="100%">
 							<tr>
 								<td ALIGN="CENTER" height="30px">
-									<INPUT id="disable-on-screen-messages" TYPE=radio name=Messages title="Disabled">
+									<INPUT id="disable-on-screen-messages" value="disabled" TYPE=radio name=Messages title="Disabled">
 									<label for="disable-on-screen-messages">Disabled</label>
 								</td>
 								<td ALIGN="CENTER">
-									<INPUT id="enabled-on-screen-messages" TYPE=radio CHECKED name=Messages
-										title="Enabled">
+									<INPUT id="enabled-on-screen-messages" value="enabled" TYPE=radio CHECKED name=Messages title="Enabled">
 									<label for="enabled-on-screen-messages">Enabled</label>
 								</td>
 							</tr>
@@ -159,100 +246,58 @@
 						<legend>Frame Grab Indicator</legend>
 						<table width="100%">
 							<tr>
-								<td width="52%" ALIGN="left" height="30px">
-									<INPUT TYPE=radio name=Indicator title="Use_Freeze_Image">Use Freeze Image
+								<td colspan="2" align="center">
+									<INPUT id="use-freeze-image" TYPE=radio name=Indicator title="Use_Freeze_Image">
+									<label for="use-freeze-image">Use Freeze Image</label>
 								</td>
-								<td width="48%" ALIGN="left">
-									<INPUT TYPE=radio CHECKED name=Indicator title="Use_Record_Symbol">Use Record Symbol
+								<td colspan="2" align="center">
+									<INPUT id="use-record-symbol" TYPE=radio CHECKED name=Indicator title="Use_Record_Symbol">
+									<label for="use-record-symbol">Use Record Symbol</label>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2" ALIGN="CENTER">
-									<table width="70%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="37%" align="right" height="40">Indicator Display Tim
-													(seconds):</td>
-												<td width="43%" align="left" style="padding-left:10px;">
-													<div id="container">
-														<div id="example">
-															<div id="slideContainer2">
-																<div id="slideHandle2"></div>
-															</div>
-
-
-															<script type="text/javascript">
-
-																window.addEvent('domready', function () {
-																	var slider1 = new Slider('slideContainer2', 'slideHandle2', { onComplete: function (val) { $('pos2').setHTML(val); }, steps: 5 });
-																});
-															</script>
-														</div>
-												</td>
-												<td width="20%" style="padding-left:10px;">
-													<div id="pos2">0</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+								<td class="width-left" align="right">Indicator Display Tim(seconds)</td>
+								<td colspan="2" class="width-middle">
+									<div id="slideContainer2">
+										<div id="slideHandle2"></div>
+									</div>
+								</td>
+								<td align="left">
+									<div id="pos2">0</div>
 								</td>
 							</tr>
 						</table>
 					</fieldset>
+
 					<fieldset class="legend">
 						<legend>Scan Input Configuration</legend>
 						<table width="100%">
 							<tr>
-								<td width="22%" ALIGN="CENTER">&nbsp;</td>
-								<td width="78%" ALIGN="left">
-									<table width="55%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="55%" ALIGN="left" height="30px"><INPUT TYPE=radio
-														name=InputConfiguration title="Disable_Message">
-													Disable Message</td>
-												<td width="45%" ALIGN="left"><INPUT TYPE=radio CHECKED
-														name=InputConfiguration title="Enable_Message">
-													Enable Message</td>
-											</tr>
-										</tbody>
-									</table>
+								<td colspan="2" ALIGN="center">
+									<INPUT id="input-configuration" value="disable" TYPE=radio name=InputConfiguration title="Disable_Message">
+									<label for="input-configuration">Disable Message</label>
+								</td>
+								<td colspan="2" ALIGN="center">
+									<INPUT id="enable-input-configuration" value="enable" TYPE=radio CHECKED name=InputConfiguration title="Enable_Message">
+									<label for="enable-input-configuration">Enable Message</label>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2" ALIGN="CENTER">
-									<table width="70%" border="0" cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="37%" align="right" height="40">Show vaild input signal during
-													scanning (seconds)：
-												</td>
-												<td width="43%" align="left" style="padding-left:10px;">
-													<div id="container">
-														<div id="example">
-															<div id="slideContainer3">
-																<div id="slideHandle3"></div>
-															</div>
-
-
-															<script type="text/javascript">
-
-																window.addEvent('domready', function () {
-																	var slider1 = new Slider('slideContainer3', 'slideHandle3', { onComplete: function (val) { $('pos3').setHTML(val); }, steps: 5 });
-																});
-															</script>
-														</div>
-												</td>
-												<td width="20%" style="padding-left:10px;">
-													<div id="pos3">0</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+								<td class="width-left" align="right">
+									Show vaild input signal during scanning (seconds)：
+								</td>
+								<td colspan="2" class="width-middle">
+									<div id="slideContainer3">
+										<div id="slideHandle3"></div>
+									</div>
+								</td>
+								<td>
+									<div id="pos3">0</div>
 								</td>
 							</tr>
 						</table>
 					</fieldset>
+
 					<fieldset class="legend">
 						<legend>PIP Message Configuration</legend>
 						<table width="100%">
