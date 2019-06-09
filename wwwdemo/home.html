@@ -27,12 +27,16 @@
 			// 把相关的接口都写在这里
 			var interface = {
 				mouseOptionsHandler: function (type) {
-					console.log(type)
+					var map = {
+						'Enable Remote Mouse': 1,
+						'Disable OSD Mouse': 0
+					}
+					console.log(map[type])
 					$.ajax({
 						method: 'post',
 						url: API.mouseOptions,
 						data: {
-							type: type // 'Enable Remote Mouse' or 'Disable OSD Mouse'
+							type: map[type]
 						}
 					}).done(function (res) {
 						console.log(res)
@@ -271,8 +275,9 @@
 						<legend>Mouse Options</legend>
 						<table width="100%">
 							<tr>
-								<td colspan="2" ALIGN="CENTER" height="30px"><input type=button name='remote-mouse'
-										value="Enable Remote Mouse"></td>
+								<td colspan="2" ALIGN="CENTER" height="30px">
+									<input type=button name='remote-mouse' value="Enable Remote Mouse">
+									</td>
 								<td colspan="2" ALIGN="CENTER"><input type=button name='remote-mouse'
 										value="Disable OSD Mouse"></td>
 							</tr>
