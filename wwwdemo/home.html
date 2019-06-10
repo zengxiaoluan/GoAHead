@@ -14,6 +14,7 @@
 	<link href="css/slider.css" rel="stylesheet" type="text/css" />
 	<script type="text/javascript" src="./js/jquery.min.js"></script>
 	<script type="text/javascript" src="./js/mootools.js"></script>
+	<script type="text/javascript" src="./js/rangeslider.min.js"></script>
 	<script type="text/javascript" src="./js/slider.js"></script>
 
 	<script>
@@ -45,14 +46,15 @@
 					console.log('页面加载已经完成')
 				},
 				enableTimeSliderHandler: function (val) {
-					console.log('滑动值：' + val)
+					var data = {
+						type: '1',
+						data: val
+					}
+					console.log(data)
 					$.ajax({
 						method: 'post',
-						url: API.setSlider,
-						data: {
-							type: 'Enable Time',
-							data: val
-						}
+						url: '/goform/SetSlider',
+						data: data
 					}).done(function (res) {
 						console.log(res)
 					})
@@ -71,11 +73,16 @@
 				},
 				indicatorSliderHandler: function (step) {
 					console.log(step)
+					var data = {
+						type: 2,
+						data: step
+					}
+					console.log(data)
 					$.ajax({
 						method: 'post',
-						url: API.indicatorSliderHandler,
+						url: '/goform/SetSelect',
 						data: {
-							step: step
+							data: data
 						}
 					}).done(function (res) {
 						console.log(res)
@@ -88,17 +95,6 @@
 						url: '/goform/scanningSlider',
 						data: {
 							step: step
-						}
-					}).done(function (res) {
-						console.log(res)
-					})
-				},
-				toggleMessages: function (operator) {
-					$.ajax({
-						method: 'post',
-						url: '/goform/toggleMessages',
-						data: {
-							operator: operator
 						}
 					}).done(function (res) {
 						console.log(res)
@@ -206,17 +202,22 @@
 					steps: 5
 				});
 
-				// mouse options
-				$("[name='remote-mouse']").click(function () {
-					$("[name='remote-mouse']").removeClass('active')
-					$(this).addClass('active')
-					interface.mouseOptionsHandler($(this).val())
-				});
-
 				// On-Screen Messages
 				$('[name="Messages"]').click(function (){
-					console.log(this.value)
-					interface.toggleMessages(this.value)
+					var data = {
+						type: 1,
+						data: this.value === 'disabled' ? 0 : 1
+					};
+					console.log(data)
+					$.ajax({
+						method: 'post',
+						url: '/goform/SetSelect',
+						data: {
+							operator: operator
+						}
+					}).done(function (res) {
+						console.log(res)
+					})
 				});
 
 				$("[name='Indicator']").click(function () {
@@ -249,17 +250,19 @@
 		})(jQuery)
 
 		function enableRemoteMouse () {
-			var button = jQuery('#enable-remote-mouse')
-			console.log(button[0].checked)
+			var $ = jQuery;
+			var button = $('#enable-remote-mouse')
+			var data = button[0].checked ? 1 : 0
+			console.log(data)
 			$.ajax({
 				type: "POST",
-				url: "url",
+				url: "/goform/SetRemoteMouse",
 				data: {
-					data: 1
+					data: data
 				},
 				dataType: "dataType",
 				success: function (response) {
-					
+					console.log(response)
 				}
 			});
 		}
@@ -289,14 +292,6 @@
 					<fieldset class="legend">
 						<legend>Mouse Options</legend>
 						<table width="100%">
-							<tr>
-								<td colspan="2" ALIGN="CENTER" height="30px">
-									<input type=button name='remote-mouse' value="Enable Remote Mouse">
-								</td>
-								<td colspan="2" ALIGN="CENTER">
-									<input type=button name='remote-mouse' value="Disable OSD Mouse">
-								</td>
-							</tr>
 							<tr>
 								<td align="right" class="width-left">Enable Time (seconds)</td>
 								<td colspan="2" style="width: 240px;">
