@@ -71,23 +71,6 @@
 						console.log(res)
 					})
 				},
-				indicatorSliderHandler: function (step) {
-					console.log(step)
-					var data = {
-						type: 2,
-						data: step
-					}
-					console.log(data)
-					$.ajax({
-						method: 'post',
-						url: '/goform/SetSelect',
-						data: {
-							data: data
-						}
-					}).done(function (res) {
-						console.log(res)
-					})
-				},
 			};
 
 			$(document).ready(function () {
@@ -104,12 +87,16 @@
 				var slider5 = new Slider('slideContainer5', 'slideHandle5', {
 					onComplete: function (val) {
 						$('#pos5').html(val);
-						console.log(val)
+						var data = {
+							data: +val,
+							type: 5
+						}
+						console.log(data)
 						$.ajax({
 							type: "POST",
-							url: "url",
+							url: "/goform/SetSlider",
 							data: {
-								data: val
+								data: data
 							},
 							success: function (response) {
 								console.log(response)								
@@ -121,14 +108,16 @@
 
 				new Slider('slideContainer6', 'slideHandle6', {
 					onComplete: function (val) {
-						console.log(val)
+						var data = {
+							data: +val,
+							type: 6
+						}
+						console.log(data)
 						$('#pos6').html(val);
 						$.ajax({
 							type: "POST",
 							url: "url",
-							data: {
-								data: val
-							},
+							data: data,
 							success: function (response) {
 								console.log(response)
 							}
@@ -140,7 +129,20 @@
 				var slider2 = new Slider('slideContainer2', 'slideHandle2', {
 					onComplete: function (val) {
 						$('#pos2').html(val);
-						interface.indicatorSliderHandler(val)
+						var data = {
+							type: 2,
+							data: step
+						}
+						console.log(data)
+						$.ajax({
+							method: 'post',
+							url: '/goform/SetSelect',
+							data: {
+								data: data
+							}
+						}).done(function (res) {
+							console.log(res)
+						})
 					},
 					steps: 60,
 				});
@@ -151,12 +153,16 @@
 					},
 					onComplete: function (val) {
 						$('#pos4').html(val);
-						console.log(val)
+						var data = {
+							type: 4,
+							data: +val
+						}
+						console.log(data)
 						$.ajax({
 							type: "POST",
-							url: "url",
+							url: "/goform/SetSlider",
 							data: {
-								data: val
+								data: data
 							},
 							dataType: "json",
 							success: function (response) {
