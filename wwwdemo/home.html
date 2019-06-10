@@ -18,11 +18,6 @@
 	<script type="text/javascript" src="./js/slider.js"></script>
 
 	<script>
-		var API = { // API 都写在这里
-			setSlider: '/goform/SetSlider',
-			indicator: '/goform/indicator',
-			IndicatorSlider: '/goform/IndicatorSlider'
-		};
 		(function ($) {
 			// 把相关的接口都写在这里
 			var interface = {
@@ -60,12 +55,17 @@
 					})
 				},
 				indicatorHandler: function (type) {
-					console.log(type)
+					var map = {
+						'use-freeze-image': 0,
+						'use-record-symbol': 1
+					}
+					var data = map[type]
+					console.log(data)
 					$.ajax({
 						method: 'post',
-						url: API.indicator,
+						url: '/goform/SetSelect',
 						data: {
-							type: type
+							data: data
 						}
 					}).done(function (res) {
 						console.log(res)
@@ -86,28 +86,6 @@
 						}
 					}).done(function (res) {
 						console.log(res)
-					})
-				},
-				scanningSliderHandler: function (step) {
-					console.log(step)
-					$.ajax({
-						method: 'post',
-						url: '/goform/scanningSlider',
-						data: {
-							step: step
-						}
-					}).done(function (res) {
-						console.log(res)
-					})
-				},
-				toggleInputConfiguration: function (operator) {
-					console.log(operator)
-					$.ajax({
-						method: 'POST',
-						url: '/goform/toggleInputConfiguration',
-						data: {
-							operator: operator
-						}
 					})
 				},
 			};
@@ -191,29 +169,34 @@
 
 				var slider3 = new Slider('slideContainer3', 'slideHandle3', { 
 					onComplete: function (val) {
-						console.log(val)
-						interface.scanningSliderHandler(val)
+						var data = {
+							type: 3,
+							data: ~~val
+						}
+						console.log(data)
+						$.ajax({
+							method: 'post',
+							url: '/goform/SetSlider',
+							data: {
+								data: data
+							}
+						}).done(function (res) {
+							console.log(res)
+						})
 						$('#pos3').html(val);
-					},
-					disable: function (val) {
-						console.log(val)
-						return true
 					},
 					steps: 5
 				});
 
 				// On-Screen Messages
 				$('[name="Messages"]').click(function (){
-					var data = {
-						type: 1,
-						data: this.value === 'disabled' ? 0 : 1
-					};
+					var data = this.value === 'disabled' ? 0 : 1
 					console.log(data)
 					$.ajax({
 						method: 'post',
 						url: '/goform/SetSelect',
 						data: {
-							operator: operator
+							data: data
 						}
 					}).done(function (res) {
 						console.log(res)
@@ -225,15 +208,27 @@
 				});
 
 				$('[name="InputConfiguration"]').click(function () {
-					interface.toggleInputConfiguration(this.value)
+					var data = this.value
+					console.log(data)
+					$.ajax({
+						method: 'POST',
+						url: '/goform/SetSelect',
+						data: {
+							data: data
+						}
+					})
 				})
 				$('[name="MessageConfiguration"]').click(function () {
-					console.log(this.value)
+					var data = {
+						type: 4,
+						data: +this.value
+					}
+					console.log(data)
 					$.ajax({
 						type: "POST",
-						url: "url",
+						url: "/goform/SetSelect",
 						data: {
-							data: this.value
+							data: data
 						},
 						success: function (response) {
 							console.log(response)
@@ -360,11 +355,11 @@
 						<table width="100%">
 							<tr>
 								<td colspan="2" ALIGN="center">
-									<INPUT id="input-configuration" value="disable" TYPE=radio name=InputConfiguration title="Disable_Message">
+									<INPUT id="input-configuration" value="0" TYPE=radio name=InputConfiguration title="Disable_Message">
 									<label for="input-configuration">Disable Message</label>
 								</td>
 								<td colspan="2" ALIGN="center">
-									<INPUT id="enable-input-configuration" value="enable" TYPE=radio CHECKED name=InputConfiguration title="Enable_Message">
+									<INPUT id="enable-input-configuration" value="1" TYPE=radio CHECKED name=InputConfiguration title="Enable_Message">
 									<label for="enable-input-configuration">Enable Message</label>
 								</td>
 							</tr>
