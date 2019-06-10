@@ -131,12 +131,12 @@
 						$('#pos2').html(val);
 						var data = {
 							type: 2,
-							data: step
+							data: val
 						}
 						console.log(data)
 						$.ajax({
 							method: 'post',
-							url: '/goform/SetSelect',
+							url: '/goform/SetSlider',
 							data: {
 								data: data
 							}
