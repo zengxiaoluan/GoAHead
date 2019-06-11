@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,6 +20,7 @@
 	<script>
 		(function ($) {
 			// 把相关的接口都写在这里
+		    
 			var interface = {
 				mouseOptionsHandler: function (type) {
 					var map = {
@@ -39,16 +40,19 @@
 				},
 				loadHandler: function () {
 					console.log('页面加载已经完成')
+					
 				},
+				//Mouse Options
 				enableTimeSliderHandler: function (val) {
 					var data = {
-						type: '1',
+						type: '0',
 						data: val
 					}
 					console.log(data)
 					$.ajax({
 						method: 'post',
 						url: '/goform/SetSlider',
+						type: 0,
 						data: data
 					}).done(function (res) {
 						console.log(res)
@@ -65,6 +69,7 @@
 						method: 'post',
 						url: '/goform/SetSelect',
 						data: {
+						    type: 2,
 							data: data
 						}
 					}).done(function (res) {
@@ -96,6 +101,7 @@
 							type: "POST",
 							url: "/goform/SetSlider",
 							data: {
+							    type: 4,
 								data: data
 							},
 							success: function (response) {
@@ -116,8 +122,11 @@
 						$('#pos6').html(val);
 						$.ajax({
 							type: "POST",
-							url: "url",
-							data: data,
+							url: "/goform/SetSlider",
+							data: {
+							    type: 5,
+							    data: data
+							},
 							success: function (response) {
 								console.log(response)
 							}
@@ -138,6 +147,7 @@
 							method: 'post',
 							url: '/goform/SetSlider',
 							data: {
+							    type: 1,
 								data: data
 							}
 						}).done(function (res) {
@@ -162,6 +172,7 @@
 							type: "POST",
 							url: "/goform/SetSlider",
 							data: {
+							    type: 3,
 								data: data
 							},
 							dataType: "json",
@@ -184,6 +195,7 @@
 							method: 'post',
 							url: '/goform/SetSlider',
 							data: {
+							    type: 2,
 								data: data
 							}
 						}).done(function (res) {
@@ -202,13 +214,14 @@
 						method: 'post',
 						url: '/goform/SetSelect',
 						data: {
+						    type: 1,
 							data: data
 						}
 					}).done(function (res) {
 						console.log(res)
 					})
 				});
-
+                 //Frame Grab Indicator
 				$("[name='Indicator']").click(function () {
 					interface.indicatorHandler(this.id)
 				});
@@ -220,10 +233,12 @@
 						method: 'POST',
 						url: '/goform/SetSelect',
 						data: {
+						    type: 3,
 							data: data
 						}
 					})
 				})
+				//pip message cfg
 				$('[name="MessageConfiguration"]').click(function () {
 					var data = {
 						type: 4,
@@ -234,6 +249,7 @@
 						type: "POST",
 						url: "/goform/SetSelect",
 						data: {
+						    type: 4,
 							data: data
 						},
 						success: function (response) {
@@ -453,12 +469,12 @@
 				</div>
 
 				<div class="content-3">
-					<iframe src="Video.html" id="iframepage" frameborder="0" scrolling="no" marginheight="0"
+					<iframe src="Video.asp" id="iframepage" frameborder="0" scrolling="no" marginheight="0"
 						marginwidth="0" width='960px' height='800px'></iframe>
 				</div>
 
 				<div class="content-4">
-					<iframe src="System.html" id="iframepage" frameborder="0" scrolling="no" marginheight="0"
+					<iframe src="System.asp" id="iframepage" frameborder="0" scrolling="no" marginheight="0"
 						marginwidth="0" width='960px' height='800px'>
 				</div>
 			</div>
