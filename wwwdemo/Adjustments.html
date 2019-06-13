@@ -9,6 +9,133 @@
   <link href="css/slider1.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="js/mootools.js"></script>
   <script type="text/javascript" src="js/slider.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script>
+    jQuery.noConflict();
+    function makeRequest(data, callback) {
+      jQuery.ajax({
+        type: "post",
+        url: "/goform/SetAjust",
+        data: data,
+        success: function (response) {
+          console.log(response)
+          callback && callback()
+        }
+      });
+      console.log(data)
+    }
+    jQuery(document).ready(function () {
+      var slider1 = new Slider('slideContainer1', 'slideHandle1', {
+        onComplete: function (val) {
+          $('pos1').setHTML(val);
+          var data = {
+            type: 1,
+            data: val
+          }
+          makeRequest(data)
+        },
+        steps: 200
+      });
+
+      var slider2 = new Slider('slideContainer2', 'slideHandle2', {
+        onComplete: function (val) {
+          $('pos2').setHTML(val);
+          var args = {
+            type: 2,
+            data: val
+          }
+          makeRequest(args)
+        },
+        steps: 200
+      });
+
+
+      var slider3 = new Slider('slideContainer3', 'slideHandle3', {
+        onComplete: function (val) {
+          $('pos3').setHTML(val);
+          var data = {
+            type: 3,
+            data: val
+          }
+          makeRequest(data)
+        },
+        steps: 200
+      });
+
+      var slider4 = new Slider('slideContainer4', 'slideHandle4', {
+        onComplete: function (val) {
+          $('pos4').setHTML(val);
+          var args = {
+            type: 4,
+            data: val
+          }
+          makeRequest(args)
+        },
+        steps: 200
+      });
+
+      var slider5 = new Slider('slideContainer5', 'slideHandle5', {
+        onComplete: function (val) {
+          $('pos5').setHTML(val);
+          var args = {
+            type: 5,
+            data: val
+          }
+          makeRequest(args)
+        },
+        steps: 20
+      });
+
+
+      var slider6 = new Slider('slideContainer6', 'slideHandle6', {
+        onComplete: function (val) {
+          $('pos6').setHTML(val);
+          var args = {
+            type: 6,
+            data: val
+          }
+          makeRequest(args)
+        },
+        steps: 63
+      });
+
+      var slider7 = new Slider('slideContainer7', 'slideHandle7', {
+        onComplete: function (val) {
+          $('pos7').setHTML(val);
+          var args = {
+            type: 7,
+            data: val
+          }
+          makeRequest(args)
+        },
+        steps: 31
+      });
+
+      var slider8 = new Slider('slideContainer8', 'slideHandle8', {
+        onComplete: function (val) {
+          $('pos8').setHTML(val);
+          makeRequest({
+            type: 8,
+            data: val
+          })
+        },
+        steps: 2800
+      });
+
+
+      var slider9 = new Slider('slideContainer9', 'slideHandle9', {
+        onComplete: function (val) {
+          $('pos9').setHTML(val);
+          makeRequest({
+            type: 9,
+            data: val
+          })
+        },
+        steps: 10
+      });
+
+    })
+  </script>
 </head>
 
 <body>
@@ -26,20 +153,11 @@
                     <tr>
                       <td width="29%" height="40" ALIGN="left">Brightness:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
-                          <div id="example">
-                            <div id="slideContainer1">
-                              <div id="slideHandle1"></div>
-                            </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer1', 'slideHandle1', { onComplete: function (val) { $('pos1').setHTML(val); }, steps: 200 });
-                              });
-                            </script>
+                        <div id="example">
+                          <div id="slideContainer1">
+                            <div id="slideHandle1"></div>
                           </div>
+                        </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
                         <div id="pos1">0</div>
@@ -48,20 +166,11 @@
                     <tr>
                       <td height="40" ALIGN="left">Contrast:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
-                          <div id="example">
-                            <div id="slideContainer2">
-                              <div id="slideHandle2"></div>
-                            </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer2', 'slideHandle2', { onComplete: function (val) { $('pos2').setHTML(val); }, steps: 200 });
-                              });
-                            </script>
+                        <div id="example">
+                          <div id="slideContainer2">
+                            <div id="slideHandle2"></div>
                           </div>
+                        </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
                         <div id="pos2">0</div>
@@ -70,20 +179,11 @@
                     <tr>
                       <td height="40" ALIGN="left">Color:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
-                          <div id="example">
-                            <div id="slideContainer3">
-                              <div id="slideHandle3"></div>
-                            </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer3', 'slideHandle3', { onComplete: function (val) { $('pos3').setHTML(val); }, steps: 200 });
-                              });
-                            </script>
+                        <div id="example">
+                          <div id="slideContainer3">
+                            <div id="slideHandle3"></div>
                           </div>
+                        </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
                         <div id="pos3">0</div>
@@ -92,20 +192,11 @@
                     <tr>
                       <td height="40" ALIGN="left">Hue:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
-                          <div id="example">
-                            <div id="slideContainer4">
-                              <div id="slideHandle4"></div>
-                            </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer4', 'slideHandle4', { onComplete: function (val) { $('pos4').setHTML(val); }, steps: 200 });
-                              });
-                            </script>
+                        <div id="example">
+                          <div id="slideContainer4">
+                            <div id="slideHandle4"></div>
                           </div>
+                        </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
                         <div id="pos4">0</div>
@@ -115,19 +206,10 @@
                       <td height="40" ALIGN="left">Sharpness:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
                         <div id="container">
-                          <div id="example">
-                            <div id="slideContainer5">
-                              <div id="slideHandle5"></div>
-                            </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer5', 'slideHandle5', { onComplete: function (val) { $('pos5').setHTML(val); }, steps: 20 });
-                              });
-                            </script>
+                          <div id="slideContainer5">
+                            <div id="slideHandle5"></div>
                           </div>
+                        </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
                         <div id="pos5">0</div>
@@ -136,19 +218,10 @@
                     <tr>
                       <td height="40" ALIGN="left">Noise Reduction:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
                           <div id="example">
                             <div id="slideContainer6">
                               <div id="slideHandle6"></div>
                             </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer6', 'slideHandle6', { onComplete: function (val) { $('pos6').setHTML(val); }, steps: 63 });
-                              });
-                            </script>
                           </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
@@ -158,19 +231,10 @@
                     <tr>
                       <td height="40" ALIGN="left">Phase:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
                           <div id="example">
                             <div id="slideContainer7">
                               <div id="slideHandle7"></div>
                             </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer7', 'slideHandle7', { onComplete: function (val) { $('pos7').setHTML(val); }, steps: 31 });
-                              });
-                            </script>
                           </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
@@ -180,19 +244,10 @@
                     <tr>
                       <td height="40" ALIGN="left">Frequency:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
                           <div id="example">
                             <div id="slideContainer8">
                               <div id="slideHandle8"></div>
                             </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer8', 'slideHandle8', { onComplete: function (val) { $('pos8').setHTML(val); }, steps: 2800 });
-                              });
-                            </script>
                           </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
@@ -202,19 +257,10 @@
                     <tr>
                       <td height="40" ALIGN="left">Clampwidth %:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <div id="container">
                           <div id="example">
                             <div id="slideContainer9">
                               <div id="slideHandle9"></div>
                             </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer9', 'slideHandle9', { onComplete: function (val) { $('pos9').setHTML(val); }, steps: 10 });
-                              });
-                            </script>
                           </div>
                       </td>
                       <td width="17%" style="padding-left:10px;">
