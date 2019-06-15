@@ -10,6 +10,12 @@
   <script type="text/javascript" src="js/mootools.js"></script>
   <script type="text/javascript" src="js/slider.js"></script>
   <script type="text/javascript" src="js/jquery.min.js"></script>
+  <style>
+    .disabled {
+      cursor: not-allowed;
+      color: gray;
+    }
+  </style>
   <script>
     jQuery.noConflict();
     function makeRequest(data, callback) {
@@ -122,7 +128,6 @@
         steps: 2800
       });
 
-
       var slider9 = new Slider('slideContainer9', 'slideHandle9', {
         onComplete: function (val) {
           $('pos9').setHTML(val);
@@ -134,7 +139,78 @@
         steps: 10
       });
 
+      var slider12 = new Slider('slideContainer12', 'slideHandle12', {
+        onComplete: function (val) {
+          $('pos12').setHTML(val);
+          makeRequest({
+            type: 14,
+            data: +val
+          })
+        },
+        steps: 100
+      });
+
+      var slider16 = new Slider('slideContainer16', 'slideHandle16', {
+        onComplete: function (val) {
+          $('pos16').setHTML(val); 
+        },
+        steps: 200
+      });
+
+      var slider17 = new Slider('slideContainer17', 'slideHandle17', {
+        onComplete: function (val) {
+          $('pos17').setHTML(val);
+        },
+        steps: 2000
+      });
+
+      jQuery('[name="Temperature"]').click(function () {
+        var $ = jQuery;
+        var value = this.value;
+        if(value == 0) {
+          $('#panel-temprature').addClass('disabled').find('select').attr('disabled', true);
+          $('#panel-rgb').addClass('disabled')
+        }
+        if(value == 1) {
+          $('#panel-temprature').addClass('disabled').find('select').attr('disabled', true);
+          $('#panel-rgb').removeClass('disabled')
+        }
+        if(value == 2) {
+          $('#panel-temprature').removeClass('disabled').find('select').removeAttr('disabled');
+          $('#panel-rgb').addClass('disabled')
+        }
+      });
+
+      jQuery('[name="Function"]').click(function () {
+        var $ = jQuery;
+        var value = this.value;
+
+        if(value == 2) {
+          $('#panel-gamma').removeClass('disabled').find('select').removeAttr('disabled')
+        } else {
+          $('#panel-gamma').addClass('disabled').find('select').attr('disabled', true)
+        }
+      })
+
+      jQuery('[name="Scaling"]').click(function () {
+        var $ = jQuery;
+        var value = this.value;
+
+        if (value == 3) {
+          $('.adjustable-panel').removeClass('disabled')
+        } else {
+          $('.adjustable-panel').addClass('disabled')
+        }
+      })
     })
+
+    /**
+     * 发送数据
+    */
+    function sendData(data, type, callback) {
+      var args = {data: +data, type: type};
+      makeRequest(args)
+    }
   </script>
 </head>
 
@@ -332,15 +408,20 @@
                 <table width="60%" border="0" cellspacing="0" cellpadding="0">
                   <tbody>
                     <tr>
-                      <td width="48%" height="50" ALIGN="center" valign="middle"><input type=submit
-                          name=Restore_Current2 value="Full"></td>
-                      <td width="52%" ALIGN="center" valign="middle"><input type=submit name=Restore_Current3
-                          value="Phase"></td>
+                      <td width="48%" height="50" ALIGN="center" valign="middle">
+                        <input onclick="sendData(0, 15)" type=submit name=Restore_Current2 value="Full">
+                      </td>
+                      <td width="52%" ALIGN="center" valign="middle">
+                        <input onclick="sendData(1, 15)" type=submit name=Restore_Current3 value="Phase">
+                      </td>
                     </tr>
                     <tr>
-                      <td height="50" ALIGN="center" valign="middle"><input type=submit name=Restore_Current5
-                          value="Gain Offset"></td>
-                      <td ALIGN="center" valign="middle"><input type=submit name=Restore_Current4 value="Geometry"></td>
+                      <td height="50" ALIGN="center" valign="middle">
+                        <input onclick="sendData(2, 15)" type=submit name=Restore_Current5 value="Gain Offset">
+                      </td>
+                      <td ALIGN="center" valign="middle">
+                        <input onclick="sendData(3, 15)" type=submit name=Restore_Current4 value="Geometry">
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -359,45 +440,42 @@
                 <table width="99%" border="0" cellspacing="0" cellpadding="0">
                   <tbody>
                     <tr>
-                      <td height="40" colspan="3" ALIGN="center"><input name="Temperature" type="radio" id="Temperature"
-                          value="0">Native&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input name="Temperature" type="radio" id="Temperature" value="1">RGB
-                        Adjust&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input name="Temperature" type="radio" id="Temperature" value="2" checked="checked">Temp.Adjust
+                      <td height="40" colspan="3" ALIGN="center">
+                        <input onclick="sendData(this.value, 14)" name="Temperature" type="radio" id="Native"
+                          value="0">
+                        <label for="Native">Native</label>
+
+                        <input onclick="sendData(this.value, 14)" name="Temperature" type="radio" id="Temperature" value="1">
+                        <label for="Temperature">RGB Adjust</label>
+                        
+                        <input id="TempAdjust" onclick="sendData(this.value, 14)" name="Temperature" type="radio" id="Temperature" value="2" checked="checked">
+                        <label for="TempAdjust">Temp.Adjust</label>
                       </td>
                     </tr>
-                    <tr>
+                    <tr id="panel-temprature">
                       <td width="30%" height="30px" ALIGN="center">Temperature:</td>
                       <td width="54%" align="left" style="padding-left:10px;">
-                        <select name="Selection">
-                          <option value="7500">7500</option>
-                          <option value="9300">9300</option>
-                          <option value="10000">10000</option>
+                        <select onchange="sendData(this.value, 14)" name="Selection">
+                          <option value="2">6500</option>
+                          <option value="3">7500</option>
+                          <option value="4">9300</option>
+                          <option value="5">10000</option>
                         </select>
                       </td>
                       <td width="17%" style="padding-left:10px;">&nbsp;</td>
                     </tr>
                     <tr>
-                      <td height="30px" colspan="3" ALIGN="left" valign="top">
+                      <td id="panel-rgb" height="30px" colspan="3" ALIGN="left" valign="top">
                         <fieldset class="legend">
                           <legend>RGB %</legend>
                           <table width="90%" align="center">
                             <tr>
                               <td width="11%" height="30" ALIGN="left">Red:</td>
                               <td width="73%" align="left" style="padding-left:10px;">
-                                <div id="container">
                                   <div id="example">
                                     <div id="slideContainer12">
                                       <div id="slideHandle12"></div>
                                     </div>
-
-
-                                    <script type="text/javascript">
-
-                                      window.addEvent('domready', function () {
-                                        var slider1 = new Slider('slideContainer12', 'slideHandle12', { onComplete: function (val) { $('pos12').setHTML(val); }, steps: 100 });
-                                      });
-                                    </script>
                                   </div>
                               </td>
                               <td width="16%" style="padding-left:10px;">
@@ -467,20 +545,28 @@
                 <table width="98%" border="0" cellspacing="0" cellpadding="0">
                   <tbody>
                     <tr>
-                      <td height="38" colspan="3" ALIGN="center"><input name="Function" type="radio" id="Function"
-                          value="0">Native&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input name="Function" type="radio" id="Function" value="1">DICOM&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input name="Function" type="radio" id="Function" value="2" checked="checked">Gamma</td>
+                      <td height="38" colspan="3" ALIGN="center">
+                        <input onclick="sendData(this.value, 15)" name="Function" type="radio" id="NativeFunction" value="0">
+                        <label for="NativeFunction">Native</label>
+
+                        <input onclick="sendData(this.value, 15)" name="Function" type="radio" id="DICOM" value="1">
+                        <label for="DICOM">DICOM</label>
+
+                        <input onclick="sendData(this.value, 15)" name="Function" type="radio" id="Gamma" value="2" checked="checked">
+                        <label for="Gamma">Gamma</label>
+                      </td>
                     </tr>
-                    <tr>
+                    <tr id="panel-gamma">
                       <td width="29%" height="30px" ALIGN="center">Gamma: </td>
-                      <td width="54%" align="left" style="padding-left:10px;"><select name="Selection2">
+                      <td width="54%" align="left" style="padding-left:10px;">
+                        <select onchange="sendData(this.value, 15)" name="Selection2">
                           <option value="1.8">1.8</option>
                           <option value="2.0">2.0</option>
                           <option value="2.2">2.2</option>
                           <option value="2.4">2.4</option>
                           <option value="2.6">2.6</option>
-                        </select></td>
+                        </select>
+                      </td>
                       <td width="17%" style="padding-left:10px;">&nbsp;</td>
                     </tr>
                   </tbody>
@@ -498,50 +584,40 @@
                 <table width="98%" border="0" cellspacing="0" cellpadding="0">
                   <tbody>
                     <tr>
-                      <td height="40" colspan="3" ALIGN="center"><input name="Scaling" type="radio" id="Scaling"
-                          value="0">Native&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input name="Scaling" type="radio" id="Scaling" value="1">Best Fit&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input name="Scaling" type="radio" id="Scaling" value="2">Full Screen&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input name="Scaling" type="radio" id="Scaling" value="3" checked="checked">Adjustable</td>
+                      <td height="40" colspan="3" ALIGN="center">
+                        <input onclick="sendData(this.value, 16)" name="Scaling" type="radio" id="ScalingNative" value="0">
+                        <label for="ScalingNative">Native</label>
+
+                        <input onclick="sendData(this.value, 16)" name="Scaling" type="radio" id="ScalingBestFit" value="1">
+                        <label for="ScalingBestFit">Best Fit</label>
+                        
+                        <input onclick="sendData(this.value, 16)" name="Scaling" type="radio" id="ScalingFullScreen" value="2">
+                        <label for="ScalingFullScreen">Full Screen</label>
+
+                        <input onclick="sendData(this.value, 16)" name="Scaling" type="radio" id="ScalingAdjustable" value="3" checked="checked">
+                        <label for="ScalingAdjustable">Adjustable</label>      
+                      </td>
                     </tr>
-                    <tr>
+                    <tr class="adjustable-panel">
                       <td height="30" ALIGN="center">Zoom %:</td>
                       <td width="63%" align="left" style="padding-left:10px;">
-                        <div id="container">
                           <div id="example">
                             <div id="slideContainer16">
                               <div id="slideHandle16"></div>
                             </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer16', 'slideHandle16', { onComplete: function (val) { $('pos16').setHTML(val); }, steps: 200 });
-                              });
-                            </script>
                           </div>
                       </td>
                       <td width="14%" style="padding-left:10px;">
                         <div id="pos16">0</div>
                       </td>
                     </tr>
-                    <tr>
+                    <tr class="adjustable-panel">
                       <td width="23%" height="30" ALIGN="center">H_Scaling:</td>
                       <td width="63%" align="left" style="padding-left:10px;">
-                        <div id="container">
                           <div id="example">
                             <div id="slideContainer17">
                               <div id="slideHandle17"></div>
                             </div>
-
-
-                            <script type="text/javascript">
-
-                              window.addEvent('domready', function () {
-                                var slider1 = new Slider('slideContainer17', 'slideHandle17', { onComplete: function (val) { $('pos17').setHTML(val); }, steps: 2000 });
-                              });
-                            </script>
                           </div>
                       </td>
                       <td width="14%" style="padding-left:10px;">
@@ -559,14 +635,19 @@
           <legend>Settings Restore</legend>
           <table width="100%">
             <tr>
-              <td height="30" ALIGN="CENTER"><input type=submit name=Restore_Current value="Restore Current Preset">
+              <td height="30" ALIGN="CENTER">
+                <input onclick="sendData(0, 17)" type=submit name=Restore_Current value="Restore Current Preset">
               </td>
             </tr>
             <tr>
-              <td height="30" ALIGN="CENTER"><input type=submit name=Nest_Preset value="Nest Preset"></td>
+              <td height="30" ALIGN="CENTER">
+                <input onclick="sendData(1, 17)" type=submit name=Nest_Preset value="Nest Preset">
+              </td>
             </tr>
             <tr>
-              <td height="30" ALIGN="CENTER"><input type=submit name=Refresh_Settings value="Refresh Settings"></td>
+              <td height="30" ALIGN="CENTER">
+                <input onclick="sendData(2, 17)" type=submit name=Refresh_Settings value="Refresh Settings">
+              </td>
             </tr>
           </table>
         </fieldset>
