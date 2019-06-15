@@ -7,6 +7,36 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script type="text/javascript" src="./js/jquery.min.js"></script>
   <title>Video</title>
+  <script>
+    function makeRequest(data, callback) {
+      $.ajax({
+        type: "post",
+        url: "/goform/SetVideoCfg",
+        data: data,
+        success: function (response) {
+          callback && callback(response)
+        }
+      });
+      console.log(data)
+    }
+    function routerSelectChange(data, type) {
+      var params = {
+        type: type,
+        data: +data
+      }
+      makeRequest(params)
+    }
+    function sendData(data, type, callback) {
+      var params = {
+        type: type,
+        data: +data
+      }
+      makeRequest(params)
+    }
+    function sendType(type) {
+      makeRequest({ type: type })
+    }
+  </script>
 </head>
 
 <body>
@@ -32,62 +62,72 @@
               </tr>
               <tr>
                 <td height="40" colspan="2" ALIGN="left">Input:&nbsp;
-                    <select name="Selection">
-                      <option value="S-Video1">S-Video1</option>
-                      <option value="S-Video2">S-Video2</option>
-                      <option value="DVI-I(1) Analog">DVI-I(1) Analog</option>
-                      <option value="DVI-I(2) Analog">DVI-I(2) Analog</option>
-                      <option value="SDI(1)">SDI(1)</option>
-                      <option value="SDI(2)">SDI(2)</option>
-                      <option value="DVI-I(1) Digital">DVI-I(1) Digital</option>
-                      <option value="DVI-I(2) Digital">DVI-I(2) Digital</option>
-                      <option value="CAT6(Ref)">CAT6(Ref)</option>
-                      <option value="HDMI(1)">HDMI(1)</option>
-                      <option value="HDMI(2)">HDMI(2)</option>
-                      <option value="12G_SDI">12G_SDI</option>
-                      <option value="DP1">DP1</option>
-                      <option value="DP(Ref)">DP(Ref)</option>
-                    </select>
+                  <select onchange="routerSelectChange(this.value, 0);" id="router1-input" name="Selection">
+                    <option value="0">S-Video1</option>
+                    <option value="1">S-Video2</option>
+                    <option value="2">DVI-I(1) Analog</option>
+                    <option value="3">DVI-I(2) Analog</option>
+                    <option value="4">SDI(1)</option>
+                    <option value="5">SDI(2)</option>
+                    <option value="6">DVI-I(1) Digital</option>
+                    <option value="7">DVI-I(2) Digital</option>
+                    <option value="8">CAT6(Ref)</option>
+                    <option value="9">HDMI(1)</option>
+                    <option value="10">HDMI(2)</option>
+                    <option value="11">12G_SDI</option>
+                    <option value="12">DP1</option>
+                    <option value="13">DP(Ref)</option>
+                  </select>
                 </td>
                 <td colspan="2" ALIGN="left">Output:&nbsp;
-                  <select name="Selection2">
-                    <option value="DVI-D_live">DVI-D_live</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+                  <select onchange="routerSelectChange(this.value, 1);" name="Selection2">
+                    <option value="0">DVI-D_live</option>
+                    <option value="1">DP++_1C</option>
+                    <option value="2">3G-SDI_1D</option>
+                    <option value="3">DVI-1B</option>
                   </select>
-                  </span></td>
-                <td colspan="2" ALIGN="left">Input:&nbsp;<span style="padding-left:10px;">
-                    <select name="Selection3">
-                      <option value="DP(live)">DP(live)
-                      <option value="1">1
-                      <option value="2">2
-                    </select>
-                  </span>&nbsp;</td>
+                  </span>
+                </td>
+                <td colspan="2" ALIGN="left">Input:
+                  <select onchange="routerSelectChange(this.value, 2)" name="Selection3">
+                    <option value="0">DP(live)</option>
+                    <option value="1">CAT6(live)</option>
+                  </select>
+                </td>
                 <td colspan="2" ALIGN="left">Output:
-                  <select name="Selection4">
-                    <option value="DVI-D_ref">DVI-D_ref
-                    <option value="1">1
-                    <option value="2">2
+                  <select onchange="routerSelectChange(this.value, 3)" name="Selection4">
+                    <option value="0">DVI-D_ref</option>
+                    <option value="1">DP++_2C</option>
+                    <option value="2">3G-SDI_2D</option>
+                    <option value="3">DVI-I-2B</option>
                   </select>
-                  </span></td>
+                </td>
               </tr>
               <tr>
                 <td width="63" height="30px" ALIGN="left">&nbsp;</td>
-                <td width="176" height="40" ALIGN="left"><input type=submit name=Restore_Current4 value="swtNextInput">
+                <td width="176" height="40" ALIGN="left">
+                  <button onclick="sendType(1)">swtNextInput</button>
                 </td>
                 <td width="68" height="30px" ALIGN="left">&nbsp;</td>
-                <td width="281" ALIGN="left"><input type=submit name=Restore_Current5 value="Parameter Browse"></td>
+                <td width="281" ALIGN="left">
+                  <input onclick="sendType(2)" type=submit name=Restore_Current5 value="Parameter Browse">
+                </td>
                 <td width="76" ALIGN="left">&nbsp;</td>
-                <td width="266" ALIGN="left"><input type=submit name=Restore_Current6 value="swtNextInput"></td>
+                <td width="266" ALIGN="left">
+                  <input onclick="sendType(3)" type=submit name=Restore_Current6 value="swtNextInput">
+                </td>
                 <td width="72" ALIGN="left">&nbsp;</td>
-                <td width="297" ALIGN="left"><input type=submit name=Restore_Current7 value="Parameter Browse"></td>
+                <td width="297" ALIGN="left">
+                  <input onclick="sendType(4)" type=submit name=Restore_Current7 value="Parameter Browse">
+                </td>
               </tr>
               <tr>
-                <td height="50" colspan="8" ALIGN="center"><input type=submit name=Restore_Current value="Scanning">
+                <td height="50" colspan="8" ALIGN="center">
+                  <input onclick="sendType(5)" type=submit name=Restore_Current value="Scanning">
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <input type=submit name=Restore_Current2 value="Switch Output">
+                  <input onclick="sendType(6)" type=submit name=Restore_Current2 value="Switch Output">
                   &nbsp;&nbsp;&nbsp;&nbsp;
-                  <input type=submit name=Restore_Current3 value="Grab Image"></td>
+                  <input onclick="sendType(7)" type=submit name=Restore_Current3 value="Grab Image"></td>
               </tr>
             </tbody>
           </table>
@@ -147,14 +187,16 @@
                 <table width="80%" border="0" cellspacing="0" cellpadding="0">
                   <tbody>
                     <tr>
-                      <td height="30px" ALIGN="center"><input name="Configuration" type="radio" id="RGB"
-                          onclick="webcam_enable_switch()" value="0" checked="checked">RGB
-                        &nbsp;
-                        <input type="radio" name="Configuration" value="1" id="YPrPb" onClick="webcam_enable_switch()">
-                        YPrPb
-                        &nbsp;
-                        <input type="radio" name="Configuration" value="2" id="Y" onClick="webcam_enable_switch()">
-                        Y</td>
+                      <td height="30px" ALIGN="center">
+                        <input name="Configuration" type="radio" id="RGB" onclick="sendData(this.value, 13)" value="0" checked="checked">
+                        <label for="RGB">RGB</label>
+
+                        <input onclick="sendData(this.value, 13)" type="radio" name="Configuration" value="1" id="YPrPb">
+                        <label for="YPrPb">YPrPb</label>
+
+                        <input onclick="sendData(this.value, 13)" type="radio" name="Configuration" value="2" id="Y">
+                        <label for="y">Y</label>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -164,16 +206,17 @@
         </fieldset>
         &nbsp;
 
-
         <fieldset class="legend">
           <legend>Dither</legend>
           <table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
             <tbody>
               <tr>
                 <td width="29%" height="30px" ALIGN="right">&nbsp;</td>
-                <td width="71%" ALIGN="left"><INPUT name=Enable_Dithering TYPE=checkbox title="Enable Dithering"
+                <td width="71%" ALIGN="left">
+                  <INPUT id="EnableDithering" onclick="sendData(this.checked ? 1 : 0, 15)" name=Enable_Dithering TYPE=checkbox title="Enable Dithering"
                     checked="checked">
-                  &nbsp; Enable Dithering</td>
+                    <label for="EnableDithering">Enable Dithering</label>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -186,15 +229,21 @@
             <tbody>
               <tr>
                 <td width="40" height="60" ALIGN="right">&nbsp;</td>
-                <td width="71%" ALIGN="left"><input name="Format" type="radio" id="SXGA"
-                    onclick="webcam_enable_switch()" value="0">SXGA&nbsp;&nbsp;&nbsp;&nbsp;
-                  <input name="Format" type="radio" id="WUXGA" onClick="webcam_enable_switch()" value="1"
-                    checked="checked">WUXGA</td>
+                <td width="71%" ALIGN="left">
+                  <input onclick="sendData(this.value, 14)" name="Format" type="radio" id="SXGA" value="0">
+                  <label for="SXGA">SXGA</label>
+
+                  <input onclick="sendData(this.value, 14)" name="Format" type="radio" id="WUXGA" value="1" checked="checked">
+                  <label for="WUXGA">WUXGA</label>
+                </td>
               </tr>
               <tr>
                 <td ALIGN="right" height="60">&nbsp;</td>
-                <td ALIGN="left"><INPUT name=Enable_Smartlock TYPE=checkbox title="Enable Smartlock" checked="checked">
-                  &nbsp; Enable Smartlock</td>
+                <td ALIGN="left">
+                  <INPUT id="EnableSmartlock" onclick="sendData(this.checked ? 1 : 0, 16)" name=Enable_Smartlock TYPE=checkbox title="Enable Smartlock" checked="checked">
+                  &nbsp; 
+                  <label for="EnableSmartlock">Enable Smartlock</label>
+                </td>
               </tr>
             </tbody>
           </table>
